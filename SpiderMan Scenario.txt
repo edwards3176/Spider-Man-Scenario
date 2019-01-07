@@ -1,0 +1,114 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp20
+{
+	class Program
+	{
+		static void Main()
+		{
+			SpiderMan.Endurance = 100;
+			SpiderMan.WebFluid = 100;
+			Building.CurrentFloor = 0;
+			bool SpideyLives;
+			SpideyLives = true;
+			if (SpideyLives)
+			{
+				int UserInput;
+				int x;
+				x = Building.CurrentFloor;
+				Console.WriteLine("Mary Jane is in trouble! Reach the top of the building to save her!");
+				Console.WriteLine("Press enter to continue.");
+				Console.ReadLine();
+				for (x = 0; x < 10; x++)
+				{
+					Console.WriteLine("Endurance Left: " + SpiderMan.Endurance);
+					Console.WriteLine("Web Fluid Left: " + SpiderMan.WebFluid);
+					Console.WriteLine("Total Floors: " + Building.NumberOfFloors);
+					Console.WriteLine("You are on floor: " + Building.CurrentFloor);
+					Console.WriteLine("What do you do? (Enter 1 to climb using endurance or 2 to swing up using Web Fluid.");
+					UserInput = Convert.ToInt32(Console.ReadLine());
+					if (UserInput == 1)
+					{
+						SpiderMan.Climb();
+						Console.WriteLine("You have chosen to climb.");
+						Console.WriteLine("You clamber up to the next level.");
+						Console.WriteLine("Press enter to continue.");
+						Console.ReadLine();
+						Console.Clear();
+					}
+					else if (UserInput == 2)
+					{
+						SpiderMan.UseWebFluid();
+						Console.WriteLine("You have chosen to use Web Fluid");
+						Console.WriteLine("You swing up to the next level.");
+						Console.WriteLine("Press enter to continue.");
+						Console.ReadLine();
+						Console.Clear();
+					}
+					else
+					{
+						Console.WriteLine("Please enter either 1 or 2.");
+						Console.WriteLine("Press enter to continue.");
+						Console.ReadLine();
+						Console.Clear();
+					}
+					if (SpiderMan.Endurance == 0)
+					{
+						Console.WriteLine("You have run out of endurance, and fall off the building to your death. Game Over!");
+						Console.WriteLine("Press enter to continue.");
+						Console.ReadLine();
+						Console.Clear();
+						SpideyLives = false;
+						Main();
+					}
+					else if (SpiderMan.WebFluid == 0)
+					{
+						Console.WriteLine("You have no energy left, and not enough Web Fluid to support your weight. You fall off the building to your death. Game Over!");
+						Console.WriteLine("Press enter to continue.");
+						Console.ReadLine();
+						Console.Clear();
+						SpideyLives = false;
+						Main();
+					}
+
+				}
+				Console.WriteLine("You have reached the top of the building. Mary Jane is safe! You win!");
+				Console.WriteLine("Press enter to continue.");
+				Console.ReadLine();
+				
+
+
+
+			}
+
+
+
+		}
+	}
+	class Building
+	{
+		public static int NumberOfFloors = 10;
+		public static int CurrentFloor = 0;
+	}
+	class SpiderMan
+	{
+		public static int Endurance = 100;
+		public static int WebFluid = 100;
+
+		public static void Climb()
+		{
+			Endurance = Endurance - 10;
+			Building.CurrentFloor++;
+		}
+		public static void UseWebFluid()
+		{
+			WebFluid = WebFluid - 10;
+			Building.CurrentFloor++;
+
+		}
+	}
+}
